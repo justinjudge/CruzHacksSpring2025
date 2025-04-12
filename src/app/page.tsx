@@ -1,95 +1,157 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
+    <main className={styles['main-container']}>
+      {/* Header with navbar */}
+      <header className={styles.header}>
+        <div className={styles['logo-container']}>
+          <div className={styles['logo-image']}>
+            <Image 
+              src="/slug-icon.png" 
+              alt="Slug Icon" 
+              width={50} 
+              height={50}
+            />
+          </div>
+          <h1 className={styles['logo-text']}>CruzConnect</h1>
+        </div>
+        <nav className={styles['nav-menu']}>
+          <Link href="/" className={styles['nav-link']}>Home</Link>
+          <Link href="/about" className={styles['nav-link']}>About</Link>
+          <Link href="/contact" className={styles['nav-link']}>Contact</Link>
+        </nav>
+      </header>
+
+      {/* Hero section with background image */}
+      <div className={styles['hero-section']}>
         <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="/santa-cruz-aerial.jpg"
+          alt="Santa Cruz Aerial View"
+          fill
+          className={styles['background-image']}
           priority
         />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+        <div className={styles['hero-content']}>
+          <h2 className={styles['hero-tagline']}>Where Santa Cruz Comes Together.</h2>
+          
+          {/* Service icons */}
+          <div className={styles['services-grid']}>
+            {/* Rideshare */}
+            <div className={styles['service-card']}>
+              <div className={styles['service-card-inner']}>
+                <div className={styles['service-icon']}>
+                  <Image 
+                    src="/rideshare-icon.png" 
+                    alt="Rideshare" 
+                    width={96} 
+                    height={96}
+                  />
+                </div>
+                <h3 className={styles['service-title']}>Rideshare</h3>
+              </div>
+            </div>
+            
+            {/* Tutoring */}
+            <div className={styles['service-card']}>
+              <div className={styles['service-card-inner']}>
+                <div className={styles['service-icon']}>
+                  <Image 
+                    src="/tutoring-icon.png" 
+                    alt="Tutoring" 
+                    width={96} 
+                    height={96}
+                  />
+                </div>
+                <h3 className={styles['service-title']}>Tutoring</h3>
+              </div>
+            </div>
+            
+            {/* Recreation */}
+            <div className={styles['service-card']}>
+              <div className={styles['service-card-inner']}>
+                <div className={styles['service-icon']}>
+                  <Image 
+                    src="/recreation-icon.png" 
+                    alt="Recreation" 
+                    width={96} 
+                    height={96}
+                  />
+                </div>
+                <h3 className={styles['service-title']}>Recreation</h3>
+              </div>
+            </div>
+            
+            {/* Lost & Found */}
+            <div className={styles['service-card']}>
+              <div className={styles['service-card-inner']}>
+                <div className={styles['service-icon']}>
+                  <Image 
+                    src="/lost-found-icon.png" 
+                    alt="Lost & Found" 
+                    width={96} 
+                    height={96}
+                  />
+                </div>
+                <h3 className={styles['service-title']}>Lost & Found</h3>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
+      </div>
+
+      {/* Footer links section */}
       <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <div className={styles['footer-container']}>
+          <div className={styles['footer-columns']}>
+            {/* Lost & Found Links */}
+            <div className={styles['footer-column']}>
+              <h3 className={styles['footer-heading']}>Lost & Found</h3>
+              <ul className={styles['footer-links']}>
+                <li><Link href="/lost-found/general" className={styles['footer-link']}>General</Link></li>
+                <li><Link href="/lost-found/cowell-stevenson" className={styles['footer-link']}>Cowell & Stevenson</Link></li>
+                <li><Link href="/lost-found/rachel-carson-oakes" className={styles['footer-link']}>Rachel Carson & Oakes</Link></li>
+                <li><Link href="/lost-found/crown-merrill" className={styles['footer-link']}>Crown & Merrill</Link></li>
+              </ul>
+            </div>
+            
+            {/* Tutoring Links */}
+            <div className={styles['footer-column']}>
+              <h3 className={styles['footer-heading']}>Tutoring</h3>
+              <ul className={styles['footer-links']}>
+                <li><Link href="/tutoring/bsoe" className={styles['footer-link']}>BSOE</Link></li>
+                <li><Link href="/tutoring/physics" className={styles['footer-link']}>Physics</Link></li>
+                <li><Link href="/tutoring/psychology" className={styles['footer-link']}>Psychology</Link></li>
+                <li><Link href="/tutoring/math" className={styles['footer-link']}>Math</Link></li>
+              </ul>
+            </div>
+            
+            {/* Rideshare Links */}
+            <div className={styles['footer-column']}>
+              <h3 className={styles['footer-heading']}>Rideshare</h3>
+              <ul className={styles['footer-links']}>
+                <li><Link href="/rideshare/split-uber" className={styles['footer-link']}>Split An Uber</Link></li>
+                <li><Link href="/rideshare/join-carpool" className={styles['footer-link']}>Join A Carpool</Link></li>
+                <li><Link href="/rideshare/propose" className={styles['footer-link']}>Propose New Rideshare</Link></li>
+              </ul>
+            </div>
+            
+            {/* Recreation Links */}
+            <div className={styles['footer-column']}>
+              <h3 className={styles['footer-heading']}>Recreation</h3>
+              <ul className={styles['footer-links']}>
+                <li><Link href="/recreation/sports" className={styles['footer-link']}>Sports</Link></li>
+                <li><Link href="/recreation/weightlifting" className={styles['footer-link']}>Weightlifting</Link></li>
+                <li><Link href="/recreation/hiking" className={styles['footer-link']}>Hiking</Link></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </footer>
-    </div>
+    </main>
   );
 }
