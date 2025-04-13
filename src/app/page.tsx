@@ -8,11 +8,17 @@ import { usePosting, PostingCategory } from './context/PostingContext';
 import styles from './page.module.css';
 import NewPostPopup from './components/NewPostPopup';
 
+import clientPromise from "../lib/mongodb";
+import type { GetServerSidePropsContext } from 'next'
+
+
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const router = useRouter();
-  const { setSelectedCategory } = usePosting();
+  const { setSelectedCategory, selectedCategory } = usePosting();
   const [showNewPostPopup, setShowNewPostPopup] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState<PostingCategory>('rideshare');
+
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
@@ -23,8 +29,10 @@ export default function Home() {
 
   // Function to handle service card click
   const handleServiceClick = (category: PostingCategory) => {
-    setSelectedCategory(category);
-    router.push('/post');
+    if (category) {
+      setSelectedCategory(category);
+      router.push('/post');
+    }
   };
 
   // Handle keyboard events for accessibility
@@ -37,6 +45,10 @@ export default function Home() {
   };
 
   // Handle opening the new post popup with a specific category
+  const handleNewPost = (category: PostingCategory = 'rideshare') => {
+    setCurrentCategory(category);
+    setShowNewPostPopup(true);
+  };
 
   return (
     <main className={styles['main-container']}>
@@ -166,7 +178,7 @@ export default function Home() {
       {/* Floating New Post Button */}
       <button 
         className={styles.floatingNewPostButton}
-        onClick={() => setShowNewPostPopup(true)}
+        onClick={() => handleNewPost()}
         aria-label="Create new post"
       >
         +
@@ -176,8 +188,8 @@ export default function Home() {
       <NewPostPopup 
         isOpen={showNewPostPopup} 
         onClose={() => setShowNewPostPopup(false)}
-        category={null}
-        />
+        category={currentCategory}
+      />
     </main>
   );
 }

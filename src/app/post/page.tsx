@@ -1,29 +1,34 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { usePosting } from '../context/PostingContext';
+import { usePosting, PostingCategory } from '../context/PostingContext';
 import styles from './post.module.css';
 import Card from '../components/Card';
 import CardGrid from '../components/CardGrid';
 import NewPostPopup from '../components/NewPostPopup';
 
 export default function PostPage() {
-  const { selectedCategory } = usePosting();
+  const { selectedCategory, setSelectedCategory } = usePosting();
   const router = useRouter();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showNewPostPopup, setShowNewPostPopup] = useState(false);
+  const initialLoadRef = useRef(true);
 
-  // Redirect to home if no category is selected
+  // Redirect to home only on initial load if no category is selected
   useEffect(() => {
-    if (!selectedCategory) {
-      router.push('/');
+    if (initialLoadRef.current) {
+      initialLoadRef.current = false;
+      if (!selectedCategory) {
+        router.push('/');
+      }
     }
   }, [selectedCategory, router]);
 
+  // If there's still no category after initial load check, return null
   if (!selectedCategory) {
-    return null; // Return nothing during the redirect
+    return null;
   }
 
   // Get the display title based on the selected category
@@ -42,10 +47,12 @@ export default function PostPage() {
     }
   };
 
-  const handleCategorySelect = (category: string) => {
-    // Navigate to the selected category
-    router.push(`/?category=${category}`);
-    setShowDropdown(false);
+  const handleCategorySelect = (category: PostingCategory) => {
+    // Set the selected category in context
+    if (category) {
+      setSelectedCategory(category);
+      setShowDropdown(false);
+    }
   };
 
   return (
@@ -105,41 +112,42 @@ export default function PostPage() {
       </header>
 
       <CardGrid columns={4}>
+        {/* Example posts for the selected category */}
         <Card 
-          title="Post 1" 
+          title={`${getCategoryTitle()} Post 1`} 
           date={new Date().toISOString()} // Today
         >
-          <p>This is the content of Post Hello my name is jeff isn&apos;t that strange? blah blah blah cool post yep that is everything</p>
+          <p>This is a {getCategoryTitle()} post example. Content will depend on the selected category.</p>
         </Card>
         <Card 
-          title="Post 2" 
+          title={`${getCategoryTitle()} Post 2`} 
           date={(() => {
             const yesterday = new Date();
             yesterday.setDate(yesterday.getDate() - 1);
             return yesterday.toISOString();
           })()}
         >
-          <p>This is the content of Post 2</p>
+          <p>Another {getCategoryTitle()} post from yesterday. Looking for people interested in this topic.</p>
         </Card>
         <Card 
-          title="Post 3" 
+          title={`${getCategoryTitle()} Post 3`} 
           date={(() => {
             const lastMonth = new Date();
             lastMonth.setMonth(lastMonth.getMonth() - 1);
             return lastMonth.toISOString();
           })()}
         >
-          <p>This is the content of Post 3</p>
+          <p>An older {getCategoryTitle()} post from last month still relevant.</p>
         </Card>
         <Card 
-          title="Post 4" 
+          title={`${getCategoryTitle()} Post 4`} 
           date={(() => {
             const lastYear = new Date();
             lastYear.setFullYear(lastYear.getFullYear() - 1);
             return lastYear.toISOString();
           })()}
         >
-          <p>This is the content of Post 4</p>
+          <p>A classic {getCategoryTitle()} post from last year that people still reference.</p>
         </Card>
       </CardGrid>
 
