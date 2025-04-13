@@ -72,7 +72,7 @@ export default function Home() {
         />
         <div className={styles['hero-content']}>
           <h2 className={styles['hero-tagline']}>
-            Where Santa Cruz Comes Together — rideshare, tutoring, lost & found, and more.
+            Where Santa Cruz Comes Together
           </h2>
         </div>
         <div className={styles['scrollCue']}>↓ Scroll to explore ↓</div>
