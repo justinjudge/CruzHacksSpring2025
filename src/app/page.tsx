@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { usePosting, PostingCategory } from './context/PostingContext';
 import styles from './page.module.css';
 
 export default function Home() {
