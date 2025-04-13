@@ -8,6 +8,10 @@ import { usePosting, PostingCategory } from './context/PostingContext';
 import styles from './page.module.css';
 import NewPostPopup from './components/NewPostPopup';
 
+import clientPromise from "../lib/mongodb";
+import type { GetServerSidePropsContext } from 'next'
+
+
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const router = useRouter();
