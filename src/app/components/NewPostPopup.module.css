@@ -13,7 +13,7 @@
 }
 
 .popup {
-  background-color: white;
+  background-color: #1a1a2e;
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   width: 90%;
@@ -21,6 +21,7 @@
   max-height: 90vh;
   overflow-y: auto;
   animation: slideIn 0.3s ease-out;
+  border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .popupHeader {
@@ -28,13 +29,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .popupHeader h2 {
   margin: 0;
   font-size: 1.5rem;
-  color: #333;
+  color: #FFD700;
   transition: color 0.3s ease;
 }
 
@@ -42,7 +43,7 @@
   background: none;
   border: none;
   font-size: 1.8rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -54,7 +55,7 @@
 }
 
 .closeButton:hover {
-  color: #121640;
+  color: #FFD700;
 }
 
 .popupContent {
@@ -62,8 +63,8 @@
 }
 
 .errorMessage {
-  background-color: #ffe8e8;
-  color: #d32f2f;
+  background-color: rgba(211, 47, 47, 0.1);
+  color: #ff6b6b;
   padding: 12px 16px;
   border-radius: 4px;
   margin-bottom: 16px;
@@ -72,8 +73,8 @@
 }
 
 .successMessage {
-  background-color: #e8f5e9;
-  color: #2e7d32;
+  background-color: rgba(46, 125, 50, 0.1);
+  color: #69f0ae;
   padding: 12px 16px;
   border-radius: 4px;
   margin-bottom: 16px;
@@ -90,29 +91,31 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
-  color: #444;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .formControl {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   font-size: 1rem;
   transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: rgba(26, 26, 46, 0.7);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .formControl:focus {
-  border-color: #121640;
+  border-color: #FFD700;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(18, 22, 64, 0.1);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
 }
 
 /* Enhanced select styling */
 select.formControl {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255, 255, 255, 0.7)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 1em;
@@ -120,20 +123,25 @@ select.formControl {
 }
 
 /* Category-specific styling */
+select.formControl option {
+  background-color: #1a1a2e;
+  color: rgba(255, 255, 255, 0.9);
+}
+
 select.formControl option[value="rideshare"] {
-  background-color: rgba(255, 215, 0, 0.05);
+  background-color: rgba(255, 215, 0, 0.1);
 }
 
 select.formControl option[value="tutoring"] {
-  background-color: rgba(0, 128, 255, 0.05);
+  background-color: rgba(0, 128, 255, 0.1);
 }
 
 select.formControl option[value="recreation"] {
-  background-color: rgba(0, 180, 0, 0.05);
+  background-color: rgba(0, 180, 0, 0.1);
 }
 
 select.formControl option[value="lost-found"] {
-  background-color: rgba(255, 100, 100, 0.05);
+  background-color: rgba(255, 100, 100, 0.1);
 }
 
 .popupFooter {
@@ -141,37 +149,39 @@ select.formControl option[value="lost-found"] {
   justify-content: flex-end;
   gap: 12px;
   padding: 16px 20px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .cancelButton {
   background-color: transparent;
-  border: 1px solid #ddd;
-  color: #666;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 }
 
 .cancelButton:hover:not(:disabled) {
-  background-color: #f5f5f5;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .submitButton {
-  background-color: #121640;
-  border: none;
-  color: white;
+  background-color: rgba(255, 215, 0, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  color: #FFD700;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 }
 
 .submitButton:hover:not(:disabled) {
-  background-color: #1a2060;
+  background-color: rgba(255, 215, 0, 0.3);
+  border-color: rgba(255, 215, 0, 0.7);
 }
 
 .cancelButton:disabled,
