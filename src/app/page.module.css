@@ -134,6 +134,9 @@
   width: 100%;
   max-width: 72rem;
   margin-top: 0rem;
+  margin: 0 auto;        
+  padding-top: 1rem;
+
 }
 
 @media (min-width: 768px) {
