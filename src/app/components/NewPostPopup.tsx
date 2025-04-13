@@ -1,6 +1,4 @@
 'use client';
-
-import { useState } from 'react';
 import styles from './NewPostPopup.module.css';
 import { PostingCategory } from '../context/PostingContext';
 
