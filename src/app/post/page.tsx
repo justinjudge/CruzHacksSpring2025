@@ -7,11 +7,13 @@ import { usePosting } from '../context/PostingContext';
 import styles from './post.module.css';
 import Card from '../components/Card';
 import CardGrid from '../components/CardGrid';
+import NewPostPopup from '../components/NewPostPopup';
 
 export default function PostPage() {
   const { selectedCategory } = usePosting();
   const router = useRouter();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showNewPostPopup, setShowNewPostPopup] = useState(false);
 
   // Redirect to home if no category is selected
   useEffect(() => {
@@ -93,7 +95,10 @@ export default function PostPage() {
             </div>
           </div>
           
-          <button className={styles.newPostButton}>
+          <button 
+            className={styles.newPostButton}
+            onClick={() => setShowNewPostPopup(true)}
+          >
             + New Post
           </button>
         </div>
@@ -137,6 +142,13 @@ export default function PostPage() {
           <p>This is the content of Post 4</p>
         </Card>
       </CardGrid>
+
+      {/* New Post Popup */}
+      <NewPostPopup 
+        isOpen={showNewPostPopup} 
+        onClose={() => setShowNewPostPopup(false)}
+        category={selectedCategory}
+      />
     </div>
   );
 } 

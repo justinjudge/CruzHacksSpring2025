@@ -6,11 +6,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { usePosting, PostingCategory } from './context/PostingContext';
 import styles from './page.module.css';
+import NewPostPopup from './components/NewPostPopup';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const router = useRouter();
   const { setSelectedCategory } = usePosting();
+  const [showNewPostPopup, setShowNewPostPopup] = useState(false);
+  const [currentCategory] = useState<PostingCategory>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -34,6 +37,8 @@ export default function Home() {
       handleServiceClick(category);
     }
   };
+
+  // Handle opening the new post popup with a specific category
 
   return (
     <main className={styles['main-container']}>
@@ -158,6 +163,22 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Floating New Post Button */}
+      <button 
+        className={styles.floatingNewPostButton}
+        onClick={() => setShowNewPostPopup(true)}
+        aria-label="Create new post"
+      >
+        +
+      </button>
+
+      {/* New Post Popup */}
+      <NewPostPopup 
+        isOpen={showNewPostPopup} 
+        onClose={() => setShowNewPostPopup(false)}
+        category={currentCategory}
+      />
     </main>
   );
 }
