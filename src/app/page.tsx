@@ -13,8 +13,6 @@ export default function Home() {
   const router = useRouter();
   const { setSelectedCategory } = usePosting();
   const [showNewPostPopup, setShowNewPostPopup] = useState(false);
-  const [currentCategory] = useState<PostingCategory>(null);
-
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
@@ -177,8 +175,8 @@ export default function Home() {
       <NewPostPopup 
         isOpen={showNewPostPopup} 
         onClose={() => setShowNewPostPopup(false)}
-        category={currentCategory}
-      />
+        category={null}
+        />
     </main>
   );
 }
