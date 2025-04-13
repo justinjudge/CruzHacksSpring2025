@@ -56,9 +56,10 @@ export default function Home() {
         </div>
         <nav className={styles['nav-menu']}>
           <Link href="/" className={styles['nav-link']}>Home</Link>
-          <Link href="/about" className={styles['nav-link']}>About</Link>
-          <Link href="/contact" className={styles['nav-link']}>Contact</Link>
+          <Link href="/" className={styles['nav-link']}>About</Link>
+          <Link href="/" className={styles['nav-link']}>Contact</Link>
         </nav>
+
       </header>
 
       {/* Hero Section */}
