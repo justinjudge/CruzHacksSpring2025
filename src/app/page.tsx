@@ -1,12 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, KeyboardEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { usePosting, PostingCategory } from './context/PostingContext';
 import styles from './page.module.css';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
+  const router = useRouter();
+  const { setSelectedCategory } = usePosting();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -15,6 +19,21 @@ export default function Home() {
   }, []);
 
   const opacity = Math.max(0, 1 - scrollY / 250); // fades header out
+
+  // Function to handle service card click
+  const handleServiceClick = (category: PostingCategory) => {
+    setSelectedCategory(category);
+    router.push('/post');
+  };
+
+  // Handle keyboard events for accessibility
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>, category: PostingCategory) => {
+    // Trigger click on Enter or Space key
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleServiceClick(category);
+    }
+  };
 
   return (
     <main className={styles['main-container']}>
@@ -61,7 +80,14 @@ export default function Home() {
         <div className={styles['services-grid']}>
 
           {/* Rideshare */}
-          <div className={styles['service-card']}>
+          <div 
+            className={styles['service-card']} 
+            onClick={() => handleServiceClick('rideshare')}
+            onKeyDown={(e) => handleKeyDown(e, 'rideshare')}
+            role="button"
+            tabIndex={0}
+            aria-label="Go to Rideshare postings"
+          >
             <div className={styles['service-card-inner']}>
               <div className={styles['service-icon']}>
                 <Image src="/images/RideshareLogo.png" alt="Rideshare" width={96} height={96} />
@@ -71,7 +97,14 @@ export default function Home() {
           </div>
 
           {/* Tutoring */}
-          <div className={styles['service-card']}>
+          <div 
+            className={styles['service-card']}
+            onClick={() => handleServiceClick('tutoring')}
+            onKeyDown={(e) => handleKeyDown(e, 'tutoring')}
+            role="button"
+            tabIndex={0}
+            aria-label="Go to Tutoring postings"
+          >
             <div className={styles['service-card-inner']}>
               <div className={styles['service-icon']}>
                 <Image src="/images/TutoringLogo.png" alt="Tutoring" width={96} height={96} />
@@ -81,7 +114,14 @@ export default function Home() {
           </div>
 
           {/* Recreation */}
-          <div className={styles['service-card']}>
+          <div 
+            className={styles['service-card']}
+            onClick={() => handleServiceClick('recreation')}
+            onKeyDown={(e) => handleKeyDown(e, 'recreation')}
+            role="button"
+            tabIndex={0}
+            aria-label="Go to Recreation postings"
+          >
             <div className={styles['service-card-inner']}>
               <div className={styles['service-icon']}>
                 <Image src="/images/RecreationLogo.png" alt="Recreation" width={96} height={96} />
@@ -91,7 +131,14 @@ export default function Home() {
           </div>
 
           {/* Lost & Found */}
-          <div className={styles['service-card']}>
+          <div 
+            className={styles['service-card']}
+            onClick={() => handleServiceClick('lost-found')}
+            onKeyDown={(e) => handleKeyDown(e, 'lost-found')}
+            role="button"
+            tabIndex={0}
+            aria-label="Go to Lost & Found postings"
+          >
             <div className={styles['service-card-inner']}>
               <div className={styles['service-icon']}>
                 <Image src="/images/LostAndFoundLogo.png" alt="Lost & Found" width={96} height={96} />
