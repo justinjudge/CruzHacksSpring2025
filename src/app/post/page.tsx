@@ -8,6 +8,7 @@ import styles from './post.module.css';
 import Card from '../components/Card';
 import CardGrid from '../components/CardGrid';
 import NewPostPopup from '../components/NewPostPopup';
+import { Post } from '../api/posts/route';
 
 export default function PostPage() {
   const { selectedCategory, setSelectedCategory } = usePosting();
@@ -15,6 +16,9 @@ export default function PostPage() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showNewPostPopup, setShowNewPostPopup] = useState(false);
   const initialLoadRef = useRef(true);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   // Redirect to home only on initial load if no category is selected
   useEffect(() => {
@@ -25,6 +29,35 @@ export default function PostPage() {
       }
     }
   }, [selectedCategory, router]);
+
+  // Fetch posts when the category changes
+  useEffect(() => {
+    if (selectedCategory) {
+      fetchPosts(selectedCategory);
+    }
+  }, [selectedCategory]);
+
+  // Function to fetch posts
+  const fetchPosts = async (category: PostingCategory) => {
+    try {
+      setIsLoading(true);
+      setError('');
+      
+      const response = await fetch(`/api/posts?category=${category}`);
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to fetch posts');
+      }
+      
+      setPosts(data.data || []);
+    } catch (err) {
+      console.error('Error fetching posts:', err);
+      setError('Failed to load posts. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // If there's still no category after initial load check, return null
   if (!selectedCategory) {
@@ -111,50 +144,47 @@ export default function PostPage() {
         </div>
       </header>
 
-      <CardGrid columns={4}>
-        {/* Example posts for the selected category */}
-        <Card 
-          title={`${getCategoryTitle()} Post 1`} 
-          date={new Date().toISOString()} // Today
-        >
-          <p>This is a {getCategoryTitle()} post example. Content will depend on the selected category.</p>
-        </Card>
-        <Card 
-          title={`${getCategoryTitle()} Post 2`} 
-          date={(() => {
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
-            return yesterday.toISOString();
-          })()}
-        >
-          <p>Another {getCategoryTitle()} post from yesterday. Looking for people interested in this topic.</p>
-        </Card>
-        <Card 
-          title={`${getCategoryTitle()} Post 3`} 
-          date={(() => {
-            const lastMonth = new Date();
-            lastMonth.setMonth(lastMonth.getMonth() - 1);
-            return lastMonth.toISOString();
-          })()}
-        >
-          <p>An older {getCategoryTitle()} post from last month still relevant.</p>
-        </Card>
-        <Card 
-          title={`${getCategoryTitle()} Post 4`} 
-          date={(() => {
-            const lastYear = new Date();
-            lastYear.setFullYear(lastYear.getFullYear() - 1);
-            return lastYear.toISOString();
-          })()}
-        >
-          <p>A classic {getCategoryTitle()} post from last year that people still reference.</p>
-        </Card>
-      </CardGrid>
+      {isLoading ? (
+        <div className={styles.loadingContainer}>
+          <div className={styles.loading}>Loading posts...</div>
+        </div>
+      ) : error ? (
+        <div className={styles.errorContainer}>
+          <div className={styles.error}>{error}</div>
+        </div>
+      ) : posts.length === 0 ? (
+        <div className={styles.emptyContainer}>
+          <div className={styles.empty}>
+            No {getCategoryTitle()} posts yet. Be the first to create one!
+          </div>
+        </div>
+      ) : (
+        <CardGrid columns={4}>
+          {posts.map((post) => (
+            <Card 
+              key={post._id?.toString() || post.title}
+              title={post.title}
+              date={post.dateCreated?.toString() || new Date().toISOString()}
+            >
+              <p>{post.description}</p>
+              {post.contact && (
+                <p className={styles.contactInfo}>
+                  <strong>Contact:</strong> {post.contact}
+                </p>
+              )}
+            </Card>
+          ))}
+        </CardGrid>
+      )}
 
       {/* New Post Popup */}
       <NewPostPopup 
         isOpen={showNewPostPopup} 
-        onClose={() => setShowNewPostPopup(false)}
+        onClose={() => {
+          setShowNewPostPopup(false);
+          fetchPosts(selectedCategory);
+        }}
+        onPostCreated={() => fetchPosts(selectedCategory)}
         category={selectedCategory}
       />
     </div>
