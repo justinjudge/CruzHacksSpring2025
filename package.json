@@ -1,0 +1,20 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "mongodb": "^3.7.4",
+        "next": "latest",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+        "@heroicons/react": "^1.0.4",
+        "autoprefixer": "^10.3.4",
+        "postcss": "^8.3.6",
+        "tailwindcss": "^2.2.15"
+    }
+}
