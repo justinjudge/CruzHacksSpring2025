@@ -24,6 +24,17 @@
   transform: translateY(-100%);
 }
 
+
+.cruz-logo {
+  width: 4rem;          /* Resize the logo */
+  height: 4rem;
+  margin-bottom: 3px;      /* Move it up */
+  margin-top: 0px;
+  object-fit: contain;  /* Keeps proportions clean */
+  object-position: center;
+}
+
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -37,7 +48,7 @@
 }
 
 .logo-text {
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #FFD700; /* Yellow color */
 }

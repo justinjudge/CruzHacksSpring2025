@@ -24,10 +24,10 @@ export default function Home() {
         <div className={styles['logo-container']}>
           <div className={styles['logo-image']}>
             <Image 
-              src="/slug-icon.png" 
+              src="/images/CruzConnectLogo.png" 
               alt="Slug Icon" 
-              width={50} 
-              height={50}
+              fill
+              className={styles['cruz-logo']} 
             />
           </div>
           <h1 className={styles['logo-text']}>CruzConnect</h1>
