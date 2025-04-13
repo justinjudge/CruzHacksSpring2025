@@ -232,3 +232,33 @@
   position: relative;
 }
 
+/* Floating New Post Button */
+.floatingNewPostButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #FFD700;
+  color: #121640;
+  border: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  z-index: 900;
+}
+
+.floatingNewPostButton:hover {
+  transform: translateY(-5px);
+  background-color: #e6c200;
+}
+
+.floatingNewPostButton:active {
+  transform: translateY(0);
+}
+
