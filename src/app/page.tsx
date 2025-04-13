@@ -11,19 +11,25 @@ import NewPostPopup from './components/NewPostPopup';
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const router = useRouter();
-  const { setSelectedCategory} = usePosting();
+  const { setSelectedCategory } = usePosting();
   const [showNewPostPopup, setShowNewPostPopup] = useState(false);
   const [currentCategory, setCurrentCategory] = useState<PostingCategory>('rideshare');
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    const handleScroll = () => {
+      // Log to verify scrolling is happening
+      const newScrollY = window.scrollY;
+      console.log('scrollY:', newScrollY);
+      setScrollY(newScrollY);
+    };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const opacity = Math.max(0, 1 - scrollY / 250); // fades header out
+  // Toggle the hidden class when scrollY is greater than, say, 20
+  const headerClasses = `${styles.header} ${scrollY > 20 ? styles['header-hidden'] : ''}`;
 
-  // Function to handle service card click
   const handleServiceClick = (category: PostingCategory) => {
     if (category) {
       setSelectedCategory(category);
@@ -31,16 +37,13 @@ export default function Home() {
     }
   };
 
-  // Handle keyboard events for accessibility
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>, category: PostingCategory) => {
-    // Trigger click on Enter or Space key
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       handleServiceClick(category);
     }
   };
 
-  // Handle opening the new post popup with a specific category
   const handleNewPost = (category: PostingCategory = 'rideshare') => {
     setCurrentCategory(category);
     setShowNewPostPopup(true);
@@ -48,10 +51,10 @@ export default function Home() {
 
   return (
     <main className={styles['main-container']}>
-
-      {/* Header (fades out on scroll) */}
-      <header className={styles.header} style={{ opacity }}>
-        <div className={styles['logo-container']}>
+      {/* Fixed header that slides off with scroll */}
+      <header className={headerClasses}>
+      <div className={styles['logo-container']}>
+          <h1 className={styles['logo-text']}>CruzConnect</h1>
           <div className={styles['logo-image']}>
             <Image 
               src="/images/CruzConnectLogo.png" 
@@ -60,29 +63,26 @@ export default function Home() {
               className={styles['cruz-logo']} 
             />
           </div>
-          <h1 className={styles['logo-text']}>CruzConnect</h1>
         </div>
         <nav className={styles['nav-menu']}>
+          <Link href="/" className={styles['sign-in-button']}>Sign In</Link>
           <Link href="/" className={styles['nav-link']}>Home</Link>
-          <Link href="/" className={styles['nav-link']}>About</Link>
-          <Link href="/" className={styles['nav-link']}>Contact</Link>
+          <Link href="/about" className={styles['nav-link']}>About</Link>
+          <Link href="/" className={styles['nav-link']}>Contact Us</Link>
         </nav>
-
       </header>
 
-      {/* Hero Section */}
+      {/* Hero Section with background image */}
       <section className={styles['hero-section']}>
         <Image
-          src="/images/santa-cruz-aerial.jpg"
+          src="/images/landscapeshotucsc.jpg"
           alt="Santa Cruz Aerial View"
           fill
           className={styles['background-image']}
           priority
         />
         <div className={styles['hero-content']}>
-          <h2 className={styles['hero-tagline']}>
-            Where Santa Cruz Comes Together
-          </h2>
+          <h2 className={styles['hero-tagline']}>Where Santa Cruz Comes Together</h2>
         </div>
         <div className={styles['scrollCue']}>↓ Scroll to explore ↓</div>
       </section>
@@ -153,7 +153,7 @@ export default function Home() {
           >
             <div className={styles['service-card-inner']}>
               <div className={styles['service-icon']}>
-                <Image src="/images/LostAndFoundLogo.png" alt="Lost & Found" width={96} height={96} />
+                <Image src="/images/LostAndFoundLogo.png" alt="Lost & Found" width={111} height={110} />
               </div>
               <h3 className={styles['service-title']}>Lost & Found</h3>
             </div>
@@ -162,14 +162,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer (unchanged) */}
+      {/* Footer (funny lol) */}
       <footer className={styles.footer}>
-        <div className={styles['footer-container']}>
-          <div className={styles['footer-columns']}>
-            {/* Your footer content here */}
+        <div className={styles['footer-columns']}>
+          {/* Left Column */}
+          <div>
+            <h3 className={styles['footer-heading']}>CruzConnect</h3>
+            <p>Connecting the Santa Cruz community.</p>
+          </div>
+
+          {/* Middle Column */}
+          <div>
+            <h3 className={styles['footer-heading']}>Links</h3>
+            <ul className={styles['footer-links']}>
+              <li><Link href="/about" className={styles['footer-link']}>About</Link></li>
+              <li><Link href="/post" className={styles['footer-link']}>Post Listings</Link></li>
+            </ul>
+          </div>
+
+          {/* Right Column */}
+          <div className={styles['footer-right']}>
+            <h3 className={styles['footer-heading']}>Contact</h3>
+            <p>Email: cruzconnect@ucsc.edu</p>
           </div>
         </div>
+
+        <hr className={styles.divider} />
+
+        <div className={styles['footer-bottom']}>
+          <p>© {new Date().getFullYear()} CruzConnect. All rights reserved.</p>
+          <span className={styles['made-in-sc']}>Made with 💛 in Santa Cruz.</span>
+        </div>
       </footer>
+
 
       {/* Floating New Post Button */}
       <button 

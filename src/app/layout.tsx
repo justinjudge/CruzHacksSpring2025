@@ -15,10 +15,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// ✅ Here’s your updated metadata
+// Here’s your updated metadata
 export const metadata: Metadata = {
   title: "CruzConnect",
-  description: "Where Santa Cruz comes together — rideshare, tutoring more.",
+  description: "Where Santa Cruz comes together ....",
   icons: {
     icon: "/images/CruzConnectLogo.png", // path to your favicon
   },
@@ -39,3 +39,4 @@ export default function RootLayout({
     </html>
   );
 }
+

@@ -5,27 +5,32 @@
   flex-direction: column;
 }
 
-/* Header styles */
+/* Keep the header fixed and overlaying the hero image */
 .header {
-  position: relative;
+  position: fixed;
   top: 0;
-  width: 100%;
-  padding: 1rem;
-  margin-top: 0rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
-  backdrop-filter: blur(8px);
-  /*transition: opacity 0.3s ease; */
+  left: 0;
+  width: 98.8%;
+  padding: 1rem 2rem;
+  background-color: rgba(0, 0, 0, 0.3); /* translucent */
+  backdrop-filter: blur(8px); /* applies blur effect */
+  z-index: 1000; /* higher than the hero image */
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
+/* When hidden, slide the header out of view */
 .header-hidden {
   transform: translateY(-100%);
+  pointer-events: none; /* optional: avoid capturing clicks when hidden */
 }
 
 
+/*: slight* maybeeeee dark tint on hover 
+.header:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+
+}
+*/
 .cruz-logo {
   width: 4rem;          /* Resize the logo */
   height: 4rem;
@@ -45,11 +50,11 @@
   width: 3rem;
   height: 3rem;
   position: relative;
-  margin-right: 0.5rem;
+  margin-left: 1rem;
 }
 
 .logo-text {
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: bold;
   color: #FFD700; /* Yellow color */
 }
@@ -76,7 +81,7 @@
   width: 100%;
   height: 85vh;
   overflow: hidden;
-  background-color: black; /* fallback bg in case image fails */
+  background-color: rgb(255, 255, 255); /* fallback bg in case image fails */
 }
 
 
@@ -93,7 +98,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 90%;
   padding: 0 1rem;
   text-align: center;
   color: white;
@@ -154,8 +159,10 @@
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+
+
 .service-card:hover {
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 15px #FFD700;
   transform: translateY(-5px);
 }
 
@@ -186,70 +193,84 @@
   margin-bottom: 1rem;
 }
 
+.service-icon img {
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon img {
+  transform: rotateZ(-8deg); /* or try rotateY / rotateX for 3D effect */
+}
+
+
 .service-title {
   font-size: 1.25rem;
   font-weight: 600;
 }
 
-/* Footer styles */
 .footer {
-  background-color: #121640; /* Navy blue color */
+  background-color: #121640;
   color: white;
-  padding: 3rem 0;
-}
-
-.footer-container {
-  width: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: 0 1rem;
+  padding: 1.5rem 1rem 1rem;
 }
 
 .footer-columns {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 2rem;
 }
 
-@media (min-width: 768px) {
-  .footer-columns {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 .footer-heading {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
+  font-size: 1rem;
   font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .footer-links {
   list-style: none;
-}
-
-.footer-links li {
-  margin-bottom: 0.5rem;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-link {
-  color: #FFD700; /* Yellow color */
+  color: #FFD700;
   text-decoration: none;
+  font-size: 0.95rem;
 }
 
 .footer-link:hover {
   text-decoration: underline;
 }
 
+.divider {
+  margin: 1rem 0;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.made-in-sc {
+  color: #FFD700;
+}
+
+
 
 /* Scroll cue arrow */
 .scrollCue {
   position: absolute;
-  bottom: 15vh; /* 🛗 Bring it up from bottom of screen */
+  bottom: 15vh; /* Bring it up from bottom of screen */
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.1rem;
   color: white;
-  animation: bounce 2s infinite;
+  animation: bounce 5s infinite;
   z-index: 20;
   opacity: 0.85;
 }
@@ -300,5 +321,22 @@
 
 .floatingNewPostButton:active {
   transform: translateY(0);
+}
+
+
+.sign-in-button {
+  background-color: #FFD700;
+  color: #121640;
+  font-weight: bold;
+  padding: 0.3rem .9rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.6s ease;
+  font-size: 0.9rem;
+
+}
+
+.sign-in-button:hover {
+  background-color: #e6c200;
 }
 
