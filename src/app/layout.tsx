@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: "CruzConnect",
   description: "Where Santa Cruz comes together — rideshare, tutoring more.",
   icons: {
-    icon: "/images/SlugWebLogo.png", // path to your favicon
+    icon: "/images/CruzConnectLogo.png", // path to your favicon
   },
 };
 
