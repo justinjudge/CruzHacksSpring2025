@@ -40,7 +40,7 @@ export default function Home() {
       {/* Hero section with background image */}
       <div className={styles['hero-section']}>
         <Image
-          src="/santa-cruz-aerial.jpg"
+          src="/santa-cruz-aerial.png"
           alt="Santa Cruz Aerial View"
           fill
           className={styles['background-image']}
