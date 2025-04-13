@@ -2,9 +2,19 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { usePosting, PostingCategory } from './context/PostingContext';
 import styles from './page.module.css';
 
 export default function Home() {
+  const { setSelectedCategory } = usePosting();
+  const router = useRouter();
+
+  const handleServiceCardClick = (category: PostingCategory) => {
+    setSelectedCategory(category);
+    router.push('/post');
+  };
+
   return (
     <main className={styles['main-container']}>
       {/* Header with navbar */}
@@ -42,7 +52,10 @@ export default function Home() {
           {/* Service icons */}
           <div className={styles['services-grid']}>
             {/* Rideshare */}
-            <div className={styles['service-card']}>
+            <div 
+              className={styles['service-card']} 
+              onClick={() => handleServiceCardClick('rideshare')}
+            >
               <div className={styles['service-card-inner']}>
                 <div className={styles['service-icon']}>
                   <Image 
@@ -57,7 +70,10 @@ export default function Home() {
             </div>
             
             {/* Tutoring */}
-            <div className={styles['service-card']}>
+            <div 
+              className={styles['service-card']} 
+              onClick={() => handleServiceCardClick('tutoring')}
+            >
               <div className={styles['service-card-inner']}>
                 <div className={styles['service-icon']}>
                   <Image 
@@ -72,7 +88,10 @@ export default function Home() {
             </div>
             
             {/* Recreation */}
-            <div className={styles['service-card']}>
+            <div 
+              className={styles['service-card']} 
+              onClick={() => handleServiceCardClick('recreation')}
+            >
               <div className={styles['service-card-inner']}>
                 <div className={styles['service-icon']}>
                   <Image 
@@ -87,7 +106,10 @@ export default function Home() {
             </div>
             
             {/* Lost & Found */}
-            <div className={styles['service-card']}>
+            <div 
+              className={styles['service-card']} 
+              onClick={() => handleServiceCardClick('lost-found')}
+            >
               <div className={styles['service-card-inner']}>
                 <div className={styles['service-icon']}>
                   <Image 
