@@ -122,6 +122,20 @@
 .service-card {
   position: relative;
   cursor: pointer;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.service-card:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.service-card:focus {
+  outline: 3px solid #FFD700;
+  outline-offset: 2px;
 }
 
 .service-card-inner {
@@ -133,12 +147,11 @@
   align-items: center;
   justify-content: center;
   aspect-ratio: 1/1;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
 .service-card-inner:hover {
   background-color: rgba(0, 0, 0, 0.7);
-  transform: translateY(-5px);
 }
 
 .service-icon {
@@ -228,5 +241,35 @@
   border-top-right-radius: 2rem;
   z-index: 2;
   position: relative;
+}
+
+/* Floating New Post Button */
+.floatingNewPostButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #FFD700;
+  color: #121640;
+  border: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  z-index: 900;
+}
+
+.floatingNewPostButton:hover {
+  transform: translateY(-5px);
+  background-color: #e6c200;
+}
+
+.floatingNewPostButton:active {
+  transform: translateY(0);
 }
 
