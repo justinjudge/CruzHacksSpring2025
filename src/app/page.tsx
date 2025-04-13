@@ -13,7 +13,7 @@ export default function Home() {
   const router = useRouter();
   const { setSelectedCategory } = usePosting();
   const [showNewPostPopup, setShowNewPostPopup] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState<PostingCategory>(null);
+  const [currentCategory] = useState<PostingCategory>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -39,10 +39,6 @@ export default function Home() {
   };
 
   // Handle opening the new post popup with a specific category
-  const handleNewPost = (category: PostingCategory) => {
-    setCurrentCategory(category);
-    setShowNewPostPopup(true);
-  };
 
   return (
     <main className={styles['main-container']}>
