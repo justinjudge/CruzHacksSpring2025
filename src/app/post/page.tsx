@@ -9,6 +9,8 @@ import Card from '../components/Card';
 import CardGrid from '../components/CardGrid';
 import NewPostPopup from '../components/NewPostPopup';
 import { Post } from '../api/posts/route';
+import GeminiChat from '../components/GeminiChat';
+
 
 export default function PostPage() {
   const { selectedCategory, setSelectedCategory } = usePosting();
@@ -128,6 +130,10 @@ export default function PostPage() {
         </div>
       ) : (
         <CardGrid columns={4}>
+          <div>
+              <GeminiChat />
+          </div>
+
           {posts.map((post) => (
             <Card 
               key={post._id?.toString() || post.title}
