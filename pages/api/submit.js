@@ -13,8 +13,7 @@ export default async function handler(req, res) {
                 id: 17,
                 name: "Vue T-Shirt inserted",
                 price: 39,
-                category: "T-Shirt",
-                image: "/images/vue.jpg",
+                category: "T-Shirt"
             };
 
             await collection.insertOne(newProduct);
