@@ -10,7 +10,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 98.8%;
+  width: 100%;
   padding: 1rem 2rem;
   background-color: rgba(0, 0, 0, 0.3); /* translucent */
   backdrop-filter: blur(8px); /* applies blur effect */
