@@ -3,8 +3,12 @@
 import { useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
+if (!process.env.NEXT_PUBLIC_GEMINI_KEY) {
+  console.error('NEXT_PUBLIC_GEMINI_KEY is not defined in environment variables');
+  throw new Error('Please add your Gemini Key to .env.local');
+}
 
-const genAI = new GoogleGenerativeAI('AIzaSyBnacuuFFoHAEetGdavPFZjAFRXJDrFwIk');
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_KEY);
 
 export default function GeminiChat() {
   const [input, setInput] = useState('');
